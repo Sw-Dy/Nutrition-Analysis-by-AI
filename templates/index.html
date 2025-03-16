@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Analyzer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Nutrition Analyzer</h1>
+        <form action="/analyze" method="POST">
+            <!-- Breakfast -->
+            <div class="mb-3">
+                <label for="breakfast" class="form-label">Select Breakfast Items:</label>
+                <select id="breakfast" name="breakfast" class="form-select" multiple>
+                    {% for food in food_options %}
+                        <option value="{{ food }}">{{ food }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Lunch -->
+            <div class="mb-3">
+                <label for="lunch" class="form-label">Select Lunch Items:</label>
+                <select id="lunch" name="lunch" class="form-select" multiple>
+                    {% for food in food_options %}
+                        <option value="{{ food }}">{{ food }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Snacks -->
+            <div class="mb-3">
+                <label for="snacks" class="form-label">Select Snacks:</label>
+                <select id="snacks" name="snacks" class="form-select" multiple>
+                    {% for food in food_options %}
+                        <option value="{{ food }}">{{ food }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Dinner -->
+            <div class="mb-3">
+                <label for="dinner" class="form-label">Select Dinner Items:</label>
+                <select id="dinner" name="dinner" class="form-select" multiple>
+                    {% for food in food_options %}
+                        <option value="{{ food }}">{{ food }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Analyze</button>
+        </form>
+    </div>
+</body>
+</html>

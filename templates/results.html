@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Analysis Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="/">Nutrition Analyzer</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Nutrition Analysis Results</h1>
+
+        <!-- Health Rating Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="card-title">🌟 Health Rating</h3>
+                <p class="card-text"><strong>{{ results.health_rating }}/10</strong></p>
+            </div>
+        </div>
+
+        <!-- Deficient Nutrients Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">🧪 Deficient Nutrients</h4>
+                <ul>
+                    {% for nutrient in results.low_nutrients %}
+                        <li>{{ nutrient }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Suggested Foods Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">🍎 Suggested Foods for Each Deficient Nutrient</h4>
+                <ul>
+                    {% for nutrient, foods in results.suggested_foods.items() %}
+                        <li><strong>{{ nutrient }}</strong>: {{ foods | join(', ') }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Top 5 Foods Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">🔥 Top 5 Foods Covering Deficient Nutrients</h4>
+                <ul>
+                    {% for food in results.top_5_foods %}
+                        <li>{{ food }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <h4>🍽️ Nutrient Distribution (Pie Chart)</h4>
+                <img src="{{ url_for('static', filename='nutrient_pie_chart.png') }}" class="img-fluid shadow" alt="Pie Chart showing nutrient distribution">
+            </div>
+            <div class="col-md-6 mb-4">
+                <h4>📊 Nutrient Breakdown (Bar Chart)</h4>
+                <img src="{{ url_for('static', filename='nutrient_bar_chart.png') }}" class="img-fluid shadow" alt="Bar Chart showing nutrient breakdown">
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <h4>🥗 Top 5 Foods Covering Deficiencies (Bar Chart)</h4>
+                <img src="{{ url_for('static', filename='top_5_deficiency_covering_foods.png') }}" class="img-fluid shadow" alt="Bar Chart of Top 5 Foods Covering Deficiencies">
+            </div>
+        </div>
+
+        <!-- Model Comparison Chart Section -->
+        <h3>Model Comparison Charts</h3>
+        <div>
+            <h4>Random Forest</h4>
+            <img src="{{ url_for('static', filename='Figure_1.png') }}" class="img-fluid shadow" alt="Random Forest Chart">
+        </div>
+        <div>
+            <h4>LightGBM</h4>
+            <img src="{{ url_for('static', filename='Figure_2.png') }}" class="img-fluid shadow" alt="LightGBM Chart">
+        </div>
+        <div>
+            <h4>SVR</h4>
+            <img src="{{ url_for('static', filename='Figure_3.png') }}" class="img-fluid shadow" alt="SVC Chart">
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-primary btn-lg">🔙 Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS for responsiveness -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
